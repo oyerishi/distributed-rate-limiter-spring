@@ -2,10 +2,18 @@ package com.example.ratelimiter.entity;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
+import jakarta.persistence.Table;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import java.time.LocalDateTime;
 
 @Entity
+@Table(name = "rate_limit_buckets")
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
 public class RateLimitBucket {
     @Id
     private String identifier;     //this will store the user's IP address
