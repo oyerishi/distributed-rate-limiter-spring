@@ -21,7 +21,7 @@ public class RateLimiterService {
     @Transactional
     public boolean allowRequest(String clientId){
         //get the bucket (or create a new one)
-        RateLimitBucket bucket = bucketRepository.findById(clientId).orElse(new RateLimitBucket(clientId, 10.0, 10, 1.0, LocalDateTime.now()));
+        RateLimitBucket bucket = bucketRepository.findById(clientId).orElse(new RateLimitBucket(clientId, 2.0, 2.0, 1.0, LocalDateTime.now()));
 
         //refill logic
         refill(bucket);
