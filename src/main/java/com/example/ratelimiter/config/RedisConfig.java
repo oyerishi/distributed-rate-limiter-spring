@@ -2,14 +2,12 @@ package com.example.ratelimiter.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.ResourceElementResolver;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.core.io.Resource;
 import org.springframework.data.redis.connection.RedisConnectionFactory;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.data.redis.core.script.RedisScript;
-import org.springframework.data.redis.serializer.GenericJacksonJsonRedisSerializer;
-import org.springframework.data.redis.serializer.StringRedisSerializer;
+import org.springframework.data.redis.serializer.RedisSerializer;
 
 @Configuration
 public class RedisConfig {
@@ -19,10 +17,10 @@ public class RedisConfig {
         RedisTemplate<String, Object> template = new RedisTemplate<>();
         template.setConnectionFactory(redisConnectionFactory);
 
-        //Use Strings for keys (so they are readbale in terminal)
-        template.setKeySerializer(new StringRedisSerializer());
+        //Use Strings for keys (so they are readable in terminal)
+        template.setKeySerializer(RedisSerializer.string());
         //Use JSON for values(so we can store the Hash fields)
-        template.setValueSerializer(new GenericJacksonJsonRedisSerializer());
+        template.setValueSerializer(RedisSerializer.json());
 
         return template;
     }
