@@ -10,8 +10,8 @@ import java.util.Collections;
 @Service
 @RequiredArgsConstructor
 public class RedisRateLimiterService {
-    private RedisTemplate<String, Object> redisTemplate;
-    private RedisScript<Long> rateLimitScript;
+    private final RedisTemplate<String, Object> redisTemplate;
+    private final RedisScript<Long> rateLimitScript;
 
     public boolean isAllowed(String clientIp, int capacity, int refillRate){
         //define the unique "Locker" address
